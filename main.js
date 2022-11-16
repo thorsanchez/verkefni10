@@ -3,6 +3,7 @@ import javascriptLogo from './javascript.svg'
 import { setupCounter } from './counter.js'
 
 const button = document.querySelector("button");
+
 button.addEventListener("click", ()=>{
     if(navigator.geolocation){
         button.innerText = "Allow to detect location";
@@ -11,19 +12,31 @@ button.addEventListener("click", ()=>{
         button.innerText = "Your browser not support";
     }
 });
+
 function onSuccess(position){
     button.innerText = "Detecting your location...";
     let {latitude, longitude} = position.coords;
-    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`)
+    let lastString = [5, "e", 7, "b", 2],
+    reverseString = lastString.reverse().join(""),
+    key = concatStrings + reverseString;
+    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${key}`)
     .then(response => response.json()).then(response =>{
         let allDetails = response.results[0].components;
         console.table(allDetails);
-        let {county, postcode, country} = allDetails;
-        button.innerText = `${county} ${postcode}, ${country}`;
+        let {hamlet, road, county, city, country} = allDetails;
+        if(road == undefined || road == "unnamed road"){
+            road = hamlet;
+        }
+        if(city == undefined){
+            city = county;
+        }
+        button.innerText = `${road}, ${city}, ${country}`;
+        key = "";
     }).catch(()=>{
         button.innerText = "Something went wrong";
     });
 }
+
 function onError(error){
     if(error.code == 1){
         button.innerText = "You denied the request";
