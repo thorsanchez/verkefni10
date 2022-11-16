@@ -1,5 +1,5 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
+import javascriptLogo from '/javascript.svg'
 import { setupCounter } from './counter.js'
 
 const button = document.querySelector("button");
