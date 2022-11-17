@@ -6,9 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "browser-sync": "browser-sync start --server --files index.html styles.css",
+    "sass": "dart-sass styles.scss styles.css"
   },
   "devDependencies": {
+    "eslint": "^8.27.0",
+    "stylelint": "^14.15.0",
+    "stylelint-config-sass-guidelines": "^9.0.1",
     "vite": "^3.2.3"
+  },
+  "dependencies": {
+    "browser-sync": "^2.27.10",
+    "dart-sass": "^1.25.0"
   }
 }

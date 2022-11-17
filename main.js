@@ -1,4 +1,4 @@
-import './style.css'
+import '/Users/thorsanchez/Desktop/vite-project/styles.css'
 import javascriptLogo from './javascript.svg'
 import { setupCounter } from './counter.js'
 
